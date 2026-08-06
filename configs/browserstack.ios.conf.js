@@ -56,11 +56,16 @@ exports.config = {
       'appium:app': process.env.BROWSERSTACK_APP_ID,
       'appium:noReset': false,
       'appium:newCommandTimeout': 240,
+      'appium:settings[snapshotMaxDepth]': 62,
+      'appium:settings[customSnapshotTimeout]': 50000,
       'bstack:options': {
         projectName: process.env.BROWSERSTACK_PROJECT_NAME || 'EBAC Store Mobile iOS',
         buildName:
           process.env.BROWSERSTACK_BUILD_NAME ||
-          `ci-ios-${process.env.GITHUB_RUN_NUMBER || 'local'}`
+          `ci-ios-${process.env.GITHUB_RUN_NUMBER || 'local'}`,
+        enableCameraImageInjection: true,
+        video: true,
+        debug: true
       }
     }
   ],
