@@ -1,6 +1,14 @@
 const IOSBaseScreen = require('./IOSBaseScreen');
 
 class LoginScreen extends IOSBaseScreen {
+  get loginTab() {
+    return [
+      '~Login',
+      '-ios predicate string:type == "XCUIElementTypeButton" AND (name == "Login" OR label == "Login")',
+      '-ios class chain:**/XCUIElementTypeButton[`name == "Login" OR label == "Login"`]'
+    ];
+  }
+
   get emailInput() {
     return [
       '~input-email',
@@ -40,6 +48,9 @@ class LoginScreen extends IOSBaseScreen {
   }
 
   async login(email, password) {
+    await browser.pause(3000);
+    await this.tap(this.loginTab);
+    await browser.pause(2000);
     await this.type(this.emailInput, email);
     await this.type(this.passwordInput, password);
     await this.tap(this.loginButton);
