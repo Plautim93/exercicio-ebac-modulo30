@@ -48,9 +48,9 @@ exports.config = {
     timeout: 120000
   },
   capabilities: [
-   {
+    {
       platformName: 'iOS',
-      'appium:automationName': 'XCUITest',
+      'appium:automationName': 'Flutter',
       'appium:deviceName': process.env.IOS_DEVICE_NAME || 'iPhone 15',
       'appium:platformVersion': process.env.IOS_PLATFORM_VERSION || '17',
       'appium:app': process.env.BROWSERSTACK_APP_ID,
