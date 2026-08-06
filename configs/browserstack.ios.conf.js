@@ -23,7 +23,7 @@ exports.config = {
   path: '/wd/hub',
   user: process.env.BROWSERSTACK_USERNAME,
   key: process.env.BROWSERSTACK_ACCESS_KEY,
-  specs: ['./test/specs/**/*.spec.js'],
+  specs: ['./tests/ios/**/*.spec.js'],
   maxInstances: 1,
   logLevel: 'info',
   bail: 0,
@@ -50,28 +50,23 @@ exports.config = {
     {
       platformName: 'iOS',
       'appium:automationName': 'XCUITest',
-      'appium:deviceName': 'iPhone 12 Pro',
-      'appium:platformVersion': '14',
-      'appium:app': 'bs://67e40fe7f68ec00d52a6bc75f8e590b37dd71148',
+      'appium:deviceName': process.env.IOS_DEVICE_NAME || 'iPhone 15',
+      'appium:platformVersion': process.env.IOS_PLATFORM_VERSION || '17',
+      'appium:app': 'bs://882666679493adc644db1555a81eb8c81744ea3b',
       'appium:noReset': false,
+      'appium:fullReset': true,
       'appium:newCommandTimeout': 240,
+      'appium:launchTimeout': 60000,
       'bstack:options': {
-        projectName: 'EBAC Store Mobile iOS',
-        buildName: process.env.BROWSERSTACK_BUILD_NAME ||
+        projectName: process.env.BROWSERSTACK_PROJECT_NAME || 'EBAC Store Mobile iOS',
+        buildName:
+          process.env.BROWSERSTACK_BUILD_NAME ||
           `ci-ios-${process.env.GITHUB_RUN_NUMBER || 'local'}`,
         video: true,
-        debug: true
+        debug: true,
+        networkLogs: true
       }
     }
   ],
-  beforeSuite: async function () {
-    let state = await driver.queryAppState('br.art.ebaconline');
-    if (state !== 4) {
-      await driver.launchApp();
-    }
-  },
-  afterSuite: async function () {
-    await driver.closeApp();
-  },
   services: []
 };
