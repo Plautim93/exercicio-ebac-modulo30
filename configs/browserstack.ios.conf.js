@@ -48,22 +48,21 @@ exports.config = {
     timeout: 120000
   },
   capabilities: [
-    {
+   {
       platformName: 'iOS',
       'appium:automationName': 'XCUITest',
       'appium:deviceName': process.env.IOS_DEVICE_NAME || 'iPhone 15',
       'appium:platformVersion': process.env.IOS_PLATFORM_VERSION || '17',
       'appium:app': process.env.BROWSERSTACK_APP_ID,
       'appium:noReset': false,
+      'appium:fullReset': true,
       'appium:newCommandTimeout': 240,
-      'appium:settings[snapshotMaxDepth]': 62,
-      'appium:settings[customSnapshotTimeout]': 50000,
+      'appium:launchTimeout': 60000,
       'bstack:options': {
         projectName: process.env.BROWSERSTACK_PROJECT_NAME || 'EBAC Store Mobile iOS',
         buildName:
           process.env.BROWSERSTACK_BUILD_NAME ||
           `ci-ios-${process.env.GITHUB_RUN_NUMBER || 'local'}`,
-        enableCameraImageInjection: true,
         video: true,
         debug: true
       }
