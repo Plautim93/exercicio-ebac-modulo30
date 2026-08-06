@@ -50,7 +50,7 @@ exports.config = {
   capabilities: [
     {
       platformName: 'iOS',
-      'appium:automationName': 'Flutter',
+      'appium:automationName': 'XCUITest',
       'appium:deviceName': process.env.IOS_DEVICE_NAME || 'iPhone 15',
       'appium:platformVersion': process.env.IOS_PLATFORM_VERSION || '17',
       'appium:app': process.env.BROWSERSTACK_APP_ID,
